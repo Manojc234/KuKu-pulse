@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kuku Pulse Live</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🗞️ Kuku Pulse Live</h1>
+        <p>Here are the top 5 live news headlines (US):</p>
+
+        <ol>
+            {% for headline in headlines %}
+            <li><span class="headline-text">{{ headline }}</span></li>
+            {% endfor %}
+        </ol>
+        <button onclick="speakHeadlines()">🔊 Speak Again</button>
+
+        <div class="feedback-container">
+            <h2>Your Feedback:</h2>
+            <form method="POST">
+              <input type="text" name="feedback" class="feedback-input" placeholder="Type something..." required>
+              <button type="submit" class="feedback-button">Submit Feedback</button>
+            </form>
+          </div>
+          
+
+        
+    </div>
+
+    <script>
+        function speakHeadlines() {
+          const headlines = document.querySelectorAll(".headline-text");
+          let idx = 1;
+          headlines.forEach((headline) => {
+            const message = new SpeechSynthesisUtterance(`Headline ${idx++}: ${headline.textContent}`);
+            window.speechSynthesis.speak(message);
+          });
+        }
+      
+        window.onload = function () {
+          speakHeadlines();
+        };
+      </script>
+      
+</body>
+</html>

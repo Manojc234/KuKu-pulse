@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: kuku-pulse-live
+    env: python
+    buildCommand: ""
+    startCommand: "python app.py"
+    envVars:
+      - key: NEWS_API_KEY
+        value: your_actual_news_api_key_here
+      - key: ENABLE_TTS
+        value: true
