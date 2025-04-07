@@ -9,7 +9,9 @@ app = Flask(__name__)
 
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 NEWS_URL = f"https://newsapi.org/v2/top-headlines?country=us&apiKey={NEWS_API_KEY}"
-
+ENABLE_TTS = os.getenv("ENABLE_TTS", "true").lower() == "true"
+if ENABLE_TTS:
+    import pyttsx3
 def fetch_live_headlines():
     try:
         response = requests.get(NEWS_URL, timeout=10)
